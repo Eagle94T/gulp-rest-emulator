@@ -9,7 +9,8 @@ gulp.task('run', function () {
         corsEnable: true,
         headers: {
             XTag: '9876'
-        }
+        },
+        useJsonBody: true
     };
     return gulp.src('./mocks/**/*.js')
         .pipe(restEmulator(options));

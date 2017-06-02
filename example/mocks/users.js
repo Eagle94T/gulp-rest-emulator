@@ -20,5 +20,22 @@ module.exports = {
                 {name: 'Name4'}
             ]
         }
+    },
+    // json body test
+    '/api/v1/login': {
+    	POST: {
+    		data: function(req) {
+    			if (req.body.id == "myId") {
+    				return {
+    					code: 1,
+    					message: 'success'
+    				};
+    			}
+    			return {
+    				code: 0,
+    				message: 'fail'
+    			}
+    		}
+    	}
     }
 };

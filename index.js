@@ -1,6 +1,7 @@
 var es = require('event-stream');
 var restEmulator = require('rest-emulator');
 var express = require('express');
+var bodyParser = require('body-parser');
 var https = require('https');
 var gutil = require('gulp-util');
 var _ = require('lodash');
@@ -17,6 +18,13 @@ function gulpRestEmulator(options) {
     var restInstance;
 
     options = getNormalizeOptions(options);
+    
+    if (options.useJsonBody !== false) {
+			// parse application/x-www-form-urlencoded
+			app.use(bodyParser.urlencoded({ extended: false }))
+			// parse application/json
+			app.use(bodyParser.json())
+    }
 
     return es.through(read, end);
 
@@ -91,7 +99,8 @@ function getNormalizeOptions(options) {
         corsOptions: {},
         headers: {},
         httpsEnable: false,
-        httpsOptions: {}
+        httpsOptions: {},
+        useJsonBody: false
     };
 
     if (!_.isPlainObject(options)) {

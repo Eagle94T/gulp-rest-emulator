@@ -5,6 +5,11 @@ gulp-rest-emulator
 
 [![NPM](https://nodei.co/npm/gulp-rest-emulator.png?downloads=true&downloadRank=true)](https://nodei.co/npm/gulp-rest-emulator/)
 
+# Modifications
+
+* last rest-emulator is applied. (from github)
+* option(useJsonBody) is added.
+
 # Installation
 
     npm install --save gulp-rest-emulator
@@ -32,7 +37,8 @@ gulp-rest-emulator
             corsOptions: {}, // CORS options, default all origins
             headers: {}, // Set headers for all response, default blank
             httpsEnable: false, // Set true to enable HTTPS
-            httpsOptions: {} // HTTPS options
+            httpsOptions: {}, // HTTPS options
+            useJsonBody: false // Set true to enable Json Body
         };
         return gulp.src('./mocks/**/*.js')
             .pipe(restEmulator(options));
@@ -190,6 +196,29 @@ module.exports = {
             },
             timeout: 100
         }
+    }
+};
+```
+
+### With dynamic data
+
+```
+module.exports = {
+    '/api/v1/login': {
+    	  POST: {
+		    		data: function(req) {
+			    			if (req.body.id == "myId") { // option - useJsonBody : true
+				    				return {
+					    					code: 1,
+					    					message: 'success'
+				    				};
+			    			}
+			    			return {
+				    				code: 0,
+				    				message: 'fail'
+			    			}
+		    		}
+    	  }
     }
 };
 ```
