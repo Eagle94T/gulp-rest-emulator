@@ -205,20 +205,20 @@ module.exports = {
 ```
 module.exports = {
     '/api/v1/login': {
-    	  POST: {
-		    		data: function(req) {
-			    			if (req.body.id == "myId") { // option - useJsonBody : true
-				    				return {
-					    					code: 1,
-					    					message: 'success'
-				    				};
-			    			}
-			    			return {
-				    				code: 0,
-				    				message: 'fail'
-			    			}
-		    		}
-    	  }
+        POST: {
+            data: function(req) {
+                if (req.body.id == "myId") { // option - useJsonBody : true
+                    return {
+		        code: 1,
+                        message: 'success'
+                    };
+                }
+                return {
+                    code: 0,
+                    message: 'fail'
+                }
+            }
+        }
     }
 };
 ```
